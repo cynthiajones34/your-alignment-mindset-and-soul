@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Apply for a Discovery Call with Y.A.M.S. Wellness — holistic coaching for high-achieving Black women.">
+  <title>Apply — Y.A.M.S. Wellness</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Y.A.M.S. Wellness</a>
+      <ul class="nav-links">
+        <li><a href="/work-with-me">Work With Me</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/apply" class="nav-cta">Apply for a Discovery Call</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="mobileNav">
+      <a href="/work-with-me">Work With Me</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/apply">Apply for a Discovery Call</a>
+    </div>
+  </nav>
+
+  <section class="section bg-cream">
+    <div class="container">
+      <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:80px; align-items:start;">
+
+        <!-- Left: context -->
+        <div style="position:sticky; top:88px;">
+          <span class="eyebrow">Discovery Call</span>
+          <h1 style="font-size:clamp(1.8rem,3vw,2.6rem); margin-bottom:20px;">Let's see if we're the right fit.</h1>
+          <p style="color:var(--muted); margin-bottom:24px;">The Discovery Call is a 30-minute conversation — no pressure, no pitch. It's a chance for me to understand where you are and for you to ask anything you want to know about working together.</p>
+          <p style="color:var(--muted); margin-bottom:32px;">Complete the form and I'll be in touch within 2 business days.</p>
+
+          <div style="background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:24px 28px;">
+            <h3 style="font-size:1rem; font-family:'Inter',sans-serif; font-weight:500; margin-bottom:16px;">What happens next</h3>
+            <ol style="list-style:none; display:flex; flex-direction:column; gap:14px;">
+              <li style="display:flex; gap:12px; font-size:14px; color:var(--muted);">
+                <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--sage-dark); line-height:1.2;">1.</span>
+                I'll review your application within 2 business days.
+              </li>
+              <li style="display:flex; gap:12px; font-size:14px; color:var(--muted);">
+                <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--sage-dark); line-height:1.2;">2.</span>
+                If we seem like a good fit, I'll send you a link to schedule your Discovery Call.
+              </li>
+              <li style="display:flex; gap:12px; font-size:14px; color:var(--muted);">
+                <span style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--sage-dark); line-height:1.2;">3.</span>
+                We meet, we talk, we decide together. No obligation at the call stage.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="form-wrap" style="max-width:100%;">
+          <div id="applySuccess" class="form-success">
+            <p style="font-size:1.1rem; font-family:'Cormorant Garamond',serif; margin-bottom:8px;">Thank you — your application is in.</p>
+            <p style="font-size:14px; font-weight:400; color:var(--sage-dark);">I'll review it and reach out within 2 business days. In the meantime, feel free to explore the <a href="/work-with-me">packages page</a> or <a href="/">return home</a>.</p>
+          </div>
+
+          <form id="applyForm">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone (optional)</label>
+                <input type="tel" id="phone" name="phone">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="city">City / Location *</label>
+              <input type="text" id="city" name="city" placeholder="e.g. Atlanta, GA" required>
+            </div>
+
+            <div class="form-group">
+              <label for="package">Which package are you interested in?</label>
+              <select id="package" name="package">
+                <option value="">Select one…</option>
+                <option value="revive">REVIVE — 3 Sessions · $150</option>
+                <option value="restore">RESTORE — 2 Intensive Sessions · $350</option>
+                <option value="realign">REALIGN — 6-Week Program · $2,000</option>
+                <option value="yams-method">THE YAMS METHOD — 12-Week Transformation · $3,500</option>
+                <option value="unsure">I'm not sure yet — I'd like to talk it through</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="referral">How did you hear about Y.A.M.S. Wellness?</label>
+              <select id="referral" name="referral">
+                <option value="">Select one…</option>
+                <option>Instagram</option>
+                <option>Google</option>
+                <option>Referred by a friend</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="whyNow">What's bringing you here right now? What area of your life feels most out of alignment? *</label>
+              <textarea id="whyNow" name="whyNow" rows="5" required placeholder="Share as much or as little as feels right."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="goal">What would you like to be different 90 days from now? *</label>
+              <textarea id="goal" name="goal" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="anything">Anything else you'd like me to know before our call? (optional)</label>
+              <textarea id="anything" name="anything" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Submit My Application</button>
+            <p style="font-size:12px; color:var(--muted); margin-top:12px; text-align:center;">Your information is kept private and will only be used to prepare for our conversation.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Y.A.M.S. Wellness</div>
+        <p>Your Alignment, Mindset &amp; Soul<br>Holistic Wellness Coaching<br>Atlanta, GA</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="/work-with-me">Work With Me</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/apply">Apply</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="https://portal.yamswellness.com">Client Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Join the list</h4>
+        <p style="font-size:13px; color:#888; margin-bottom:0;">Get the free 5-Day Alignment Reset.</p>
+        <form class="footer-optin-form">
+          <input type="email" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Y.A.M.S. Wellness. All rights reserved.</span>
+      <span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Pre-select package from URL param
+    const params = new URLSearchParams(window.location.search);
+    const pkg = params.get("package");
+    if (pkg) {
+      const sel = document.getElementById("package");
+      if (sel) sel.value = pkg;
+    }
+  </script>
+</body>
+</html>

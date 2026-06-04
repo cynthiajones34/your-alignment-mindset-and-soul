@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "you-alignment-mindset-and-soul"
+  },
+  "targets": {
+    "you-alignment-mindset-and-soul": {
+      "hosting": {
+        "website": ["yams-wellness-website"],
+        "portal":  ["you-alignment-mindset-and-soul"]
+      }
+    }
+  }
+}
