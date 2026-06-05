@@ -56,6 +56,26 @@ if (contactForm) {
   });
 }
 
+// ── Scroll animations ────────────────────────────────────────────────────
+(function () {
+  const els = document.querySelectorAll("[data-animate]");
+  if (!els.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -48px 0px" }
+  );
+
+  els.forEach((el) => observer.observe(el));
+})();
+
 // ── Vibe Check application form ──────────────────────────────────────
 const applyForm = document.getElementById("applyForm");
 if (applyForm) {

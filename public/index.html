@@ -34,16 +34,16 @@
   <!-- Hero: full-viewport split -->
   <section class="hero-split">
     <div class="hero-split-text">
-      <span class="eyebrow">Atlanta, GA &middot; Holistic Wellness Coaching</span>
-      <h1 class="hero-display">For the woman who has poured into <em>everyone</em> but herself.</h1>
-      <p class="hero-sub">
+      <span class="eyebrow" data-animate="fade" style="--delay:100ms">Atlanta, GA &middot; Holistic Wellness Coaching</span>
+      <h1 class="hero-display" data-animate style="--delay:200ms">For the woman who has poured into <em>everyone</em> but herself.</h1>
+      <p class="hero-sub" data-animate style="--delay:320ms">
         Y.A.M.S. Wellness is a coaching practice for high-achieving Black women who are ready to stop surviving and start living in alignment on their terms.
       </p>
-      <div class="hero-actions">
+      <div class="hero-actions" data-animate style="--delay:420ms">
         <a href="/apply" class="btn btn-primary btn-lg">Apply for a Vibe Check</a>
         <a href="/work-with-me" class="btn btn-outline btn-lg">See How It Works</a>
       </div>
-      <div class="hero-tags">
+      <div class="hero-tags" data-animate="fade" style="--delay:540ms">
         <span class="hero-tag">Burnout Recovery</span>
         <span class="hero-tag">Career Clarity</span>
         <span class="hero-tag">Life Alignment</span>
@@ -51,7 +51,7 @@
         <span class="hero-tag">Soul Care</span>
       </div>
     </div>
-    <div class="hero-split-image">
+    <div class="hero-split-image" data-animate="right" style="--delay:100ms">
       <img src="/images/hero.png" alt="Christina Reams, Y.A.M.S. Wellness">
       <div class="hero-badge">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -70,36 +70,38 @@
   <!-- Pull quote: dusty green block -->
   <section class="pull-quote-section">
     <div class="pull-quote">
-      <p class="pull-quote-text">"I help women who feel stressed, stuck, or disconnected build a resilient mindset, nourish their bodies, and create a more peaceful, energized life from the inside out."</p>
-      <p class="pull-quote-sub">
+      <p class="pull-quote-text" data-animate="fade">"I help women who feel stressed, stuck, or disconnected build a resilient mindset, nourish their bodies, and create a more peaceful, energized life from the inside out."</p>
+      <p class="pull-quote-sub" data-animate style="--delay:160ms">
         You've built the career. You show up for everyone who needs you. From the outside, your life looks like success. But inside, you're exhausted. Disconnected. Running on empty and wondering when it gets to be your turn. That's not a productivity problem. It's an alignment problem.
       </p>
-      <a href="/about" class="btn btn-outline-light">Meet Christina</a>
+      <a href="/about" class="btn btn-outline-light" data-animate style="--delay:280ms">Meet Christina</a>
     </div>
   </section>
 
   <!-- Photo strip: 4 image slots -->
   <div class="photo-strip">
-    <div class="photo-strip-item">
+    <div class="photo-strip-item" data-animate style="--delay:0ms">
       <img src="/images/jump.png" alt="">
     </div>
-    <div class="photo-strip-item">
+    <div class="photo-strip-item" data-animate style="--delay:100ms">
       <img src="/images/contact.png" alt="">
     </div>
-    <div class="photo-strip-item">
+    <div class="photo-strip-item" data-animate style="--delay:200ms">
       <img src="/images/retreat.png" alt="">
     </div>
-    <div class="photo-strip-item">
+    <div class="photo-strip-item" data-animate style="--delay:300ms">
       <img src="/images/retreat-2.png" alt="">
     </div>
   </div>
 
   <!-- Split row: The approach -->
   <div class="split-row">
-    <div class="split-image">
-      <img src="/images/contact.png" alt="Christina Reams">
+    <div class="split-image" data-animate="left">
+      <div class="split-image-shape">
+        <img src="/images/contact.png" alt="Christina Reams">
+      </div>
     </div>
-    <div class="split-text bg-cream">
+    <div class="split-text bg-cream" data-animate="right">
       <span class="eyebrow">The Approach</span>
       <h2>The Y.A.M.S. Method is not about doing more. It's about coming home to yourself.</h2>
       <p>I'm Christina, a former corporate baddie who spent 20 years in the corporate world before following my passion for wellness and lifestyle balance in a different direction.</p>
@@ -112,63 +114,51 @@
   <section class="section bg-white">
     <div class="container">
       <div class="section-heading">
-        <span class="eyebrow">Choose Your Path</span>
-        <h2>Every package includes your private client portal.</h2>
-        <p>A secure space where your intake, session notes, and resources live between our sessions.</p>
+        <span class="eyebrow" data-animate="fade">Choose Your Path</span>
+        <h2 data-animate style="--delay:100ms">Every package includes your private client portal.</h2>
+        <p data-animate style="--delay:200ms">A secure space where your intake, session notes, and resources live between our sessions.</p>
       </div>
       <div class="packages-grid">
 
-        <div class="package-card">
-          <div class="package-card-image">
-            <!-- <img src="/images/package-revive.jpg" alt=""> -->
-            <div class="package-img-placeholder">Photo</div>
+        <div class="package-card" data-animate style="--delay:0ms">
+          <div class="package-circle package-circle-revive">
+            <!-- Replace with: <img src="/images/package-revive.jpg" alt="REVIVE package"> -->
           </div>
-          <div class="package-card-body">
-            <div class="package-name">REVIVE</div>
-            <div class="package-price">3 Sessions &middot; $150</div>
-            <p class="package-desc">The entry point. Three focused sessions to identify where you're out of alignment and build your first plan of action.</p>
-            <a href="/apply?package=revive" class="btn btn-outline btn-sm" style="align-self:flex-start;">Apply Now</a>
-          </div>
+          <div class="package-name">REVIVE</div>
+          <div class="package-price">3 Sessions &middot; $150</div>
+          <p class="package-desc">The entry point. Three focused sessions to identify where you're out of alignment and build your first plan of action.</p>
+          <a href="/apply?package=revive" class="btn btn-outline btn-sm">Apply Now</a>
         </div>
 
-        <div class="package-card featured">
-          <div class="package-card-image">
-            <!-- <img src="/images/package-restore.jpg" alt=""> -->
-            <div class="package-img-placeholder">Photo</div>
+        <div class="package-card" data-animate style="--delay:100ms">
+          <div class="package-circle package-circle-restore">
+            <!-- Replace with: <img src="/images/package-restore.jpg" alt="RESTORE package"> -->
           </div>
-          <div class="package-card-body">
-            <span class="package-tag">Most Popular</span>
-            <div class="package-name">RESTORE</div>
-            <div class="package-price">2 Intensive Sessions &middot; $350</div>
-            <p class="package-desc">Deep-dive sessions designed to break through the patterns keeping you stuck. Includes session prep, resources, and portal access.</p>
-            <a href="/apply?package=restore" class="btn btn-primary btn-sm" style="align-self:flex-start;">Apply Now</a>
-          </div>
+          <span class="package-tag">Most Popular</span>
+          <div class="package-name">RESTORE</div>
+          <div class="package-price">2 Intensive Sessions &middot; $350</div>
+          <p class="package-desc">Deep-dive sessions designed to break through the patterns keeping you stuck. Includes session prep, resources, and portal access.</p>
+          <a href="/apply?package=restore" class="btn btn-primary btn-sm">Apply Now</a>
         </div>
 
-        <div class="package-card">
-          <div class="package-card-image">
-            <!-- <img src="/images/package-realign.jpg" alt=""> -->
-            <div class="package-img-placeholder">Photo</div>
+        <div class="package-card" data-animate style="--delay:200ms">
+          <div class="package-circle package-circle-realign">
+            <!-- Replace with: <img src="/images/package-realign.jpg" alt="REALIGN package"> -->
           </div>
-          <div class="package-card-body">
-            <div class="package-name">REALIGN</div>
-            <div class="package-price">6-Week Program &middot; $2,000</div>
-            <p class="package-desc">A complete 6-week coaching engagement with weekly sessions, progress tracking, and full portal access. Built for the real work.</p>
-            <a href="/apply?package=realign" class="btn btn-outline btn-sm" style="align-self:flex-start;">Apply Now</a>
-          </div>
+          <div class="package-name">REALIGN</div>
+          <div class="package-price">6-Week Program &middot; $2,000</div>
+          <p class="package-desc">A complete 6-week coaching engagement with weekly sessions, progress tracking, and full portal access. Built for the real work.</p>
+          <a href="/apply?package=realign" class="btn btn-outline btn-sm">Apply Now</a>
         </div>
 
-        <div class="package-card">
-          <div class="package-card-image">
-            <!-- <img src="/images/package-yams-method.jpg" alt=""> -->
-            <div class="package-img-placeholder">Photo</div>
+        <div class="package-card" data-animate style="--delay:300ms">
+          <div class="package-circle package-circle-yams">
+            <!-- Replace with: <img src="/images/package-yams-method.jpg" alt="THE YAMS METHOD"> -->
           </div>
-          <div class="package-card-body">
-            <div class="package-name">THE YAMS METHOD</div>
-            <div class="package-price">12-Week Transformation &middot; $3,500</div>
-            <p class="package-desc">The signature program. Three months of weekly coaching, the complete Focus, Reflect, Refine framework, and a personalized alignment roadmap you keep forever.</p>
-            <a href="/apply?package=yams-method" class="btn btn-outline btn-sm" style="align-self:flex-start;">Apply Now</a>
-          </div>
+          <div class="package-name">THE YAMS METHOD</div>
+          <div class="package-price">12-Week Transformation &middot; $3,500</div>
+          <p class="package-desc">The signature program. Three months of weekly coaching, the complete Focus, Reflect, Refine framework, and a personalized alignment roadmap you keep forever.</p>
+          <a href="/apply?package=yams-method" class="btn btn-outline btn-sm">Apply Now</a>
         </div>
 
       </div>
@@ -182,13 +172,13 @@
   <section class="section-sm bg-cream">
     <div class="container" style="padding-bottom:48px;">
       <div class="section-heading">
-        <span class="eyebrow">Client Stories</span>
-        <h2>Real women. Real shifts.</h2>
+        <span class="eyebrow" data-animate="fade">Client Stories</span>
+        <h2 data-animate style="--delay:100ms">Real women. Real shifts.</h2>
       </div>
     </div>
     <div class="testimonials-grid">
 
-      <div class="testimonial">
+      <div class="testimonial" data-animate style="--delay:0ms">
         <span class="testimonial-quote-mark">&ldquo;</span>
         <blockquote>I'm so happy that I joined the sessions and I enjoyed them. I look forward to what this journey will continue to bring me.</blockquote>
         <div class="testimonial-footer">
@@ -197,7 +187,7 @@
         </div>
       </div>
 
-      <div class="testimonial">
+      <div class="testimonial" data-animate style="--delay:120ms">
         <span class="testimonial-quote-mark">&ldquo;</span>
         <blockquote>Thank you for always being there and encouraging me and speaking into me. You're a great coach.</blockquote>
         <div class="testimonial-footer">
@@ -206,7 +196,7 @@
         </div>
       </div>
 
-      <div class="testimonial">
+      <div class="testimonial" data-animate style="--delay:240ms">
         <span class="testimonial-quote-mark">&ldquo;</span>
         <blockquote>Thanks for your encouragement and uplifting words to take my life back.</blockquote>
         <div class="testimonial-footer">
@@ -220,10 +210,12 @@
 
   <!-- Split row: Vibe Check CTA -->
   <div class="split-row reverse">
-    <div class="split-image">
-      <img src="/images/retreat.png" alt="">
+    <div class="split-image" data-animate="right">
+      <div class="split-image-shape">
+        <img src="/images/retreat.png" alt="">
+      </div>
     </div>
-    <div class="split-text bg-rose">
+    <div class="split-text bg-rose" data-animate="left">
       <span class="eyebrow eyebrow-rose">The Vibe Check</span>
       <h2>The first step is a conversation. Not a commitment.</h2>
       <p>The Vibe Check is a 30-minute call where we talk about where you are, where you want to go, and whether working together makes sense. No pressure. No pitch. Just clarity.</p>
@@ -234,7 +226,7 @@
   <!-- Email opt-in -->
   <section class="section bg-beige">
     <div class="container">
-      <div class="optin-box">
+      <div class="optin-box" data-animate>
         <span class="eyebrow">Free Resource</span>
         <h2>Get the 5-Day Alignment Reset</h2>
         <p>A simple, powerful 5-day guide to help you come back to yourself. One practice per day. No overwhelm. Just alignment.</p>
@@ -252,9 +244,9 @@
 
   <!-- Final CTA -->
   <section class="cta-banner bg-dark">
-    <h2>Ready to stop pouring from an empty cup?</h2>
-    <p>The first step is a 30-minute Vibe Check - a conversation to see if we're the right fit. No pressure. No obligation. Just clarity.</p>
-    <a href="/apply" class="btn btn-white btn-lg">Apply for a Vibe Check</a>
+    <h2 data-animate="fade">Ready to stop pouring from an empty cup?</h2>
+    <p data-animate style="--delay:120ms">The first step is a 30-minute Vibe Check - a conversation to see if we're the right fit. No pressure. No obligation. Just clarity.</p>
+    <a href="/apply" class="btn btn-white btn-lg" data-animate style="--delay:240ms">Apply for a Vibe Check</a>
   </section>
 
   <!-- Footer -->
