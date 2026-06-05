@@ -132,7 +132,7 @@ h1, h2, h3, h4 {
   font-size: 11px !important;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: background 0.15s;
+  transition: background 200ms ease-out, color 200ms ease-out;
 }
 
 .nav-cta:hover { background: var(--sage-dark) !important; text-decoration: none; }
@@ -152,7 +152,7 @@ h1, h2, h3, h4 {
   background: var(--text);
   margin: 6px 0;
   border-radius: 2px;
-  transition: all 0.2s;
+  transition: transform 160ms ease-out, opacity 160ms ease-out;
 }
 
 .nav-mobile {
@@ -197,22 +197,20 @@ h1, h2, h3, h4 {
 .btn:active { transform: scale(0.97); }
 
 .btn-primary { background: var(--sage); color: var(--white); }
-.btn-primary:hover { background: var(--sage-dark); text-decoration: none; color: var(--white); }
-
 .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--text); }
-.btn-outline:hover { background: var(--text); color: var(--white); text-decoration: none; }
-
 .btn-outline-sage { background: transparent; color: var(--sage); border: 1px solid var(--sage); }
-.btn-outline-sage:hover { background: var(--sage); color: var(--white); text-decoration: none; }
-
 .btn-outline-light { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.5); }
-.btn-outline-light:hover { background: rgba(255,255,255,0.1); text-decoration: none; color: var(--white); }
-
 .btn-white { background: var(--white); color: var(--text); }
-.btn-white:hover { background: var(--cream); text-decoration: none; color: var(--text); }
-
 .btn-rose { background: var(--rose); color: var(--white); }
-.btn-rose:hover { background: #A87D64; text-decoration: none; color: var(--white); }
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { background: var(--sage-dark); text-decoration: none; color: var(--white); }
+  .btn-outline:hover { background: var(--text); color: var(--white); text-decoration: none; }
+  .btn-outline-sage:hover { background: var(--sage); color: var(--white); text-decoration: none; }
+  .btn-outline-light:hover { background: rgba(255,255,255,0.1); text-decoration: none; color: var(--white); }
+  .btn-white:hover { background: var(--cream); text-decoration: none; color: var(--text); }
+  .btn-rose:hover { background: #A87D64; text-decoration: none; color: var(--white); }
+}
 
 .btn-lg { padding: 16px 44px; font-size: 13px; }
 .btn-sm { padding: 10px 24px; font-size: 11px; }
@@ -559,11 +557,13 @@ h1, h2, h3, h4 {
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 24px;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
   flex-shrink: 0;
 }
 
-.package-card:hover .package-circle { transform: scale(1.04); }
+@media (hover: hover) and (pointer: fine) {
+  .package-card:hover .package-circle { transform: scale(1.04); }
+}
 .package-circle img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Gradient fills until photos are added */
