@@ -191,8 +191,10 @@ h1, h2, h3, h4 {
   cursor: pointer;
   border: none;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: background 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out, transform 160ms ease-out;
 }
+
+.btn:active { transform: scale(0.97); }
 
 .btn-primary { background: var(--sage); color: var(--white); }
 .btn-primary:hover { background: var(--sage-dark); text-decoration: none; color: var(--white); }
@@ -621,15 +623,15 @@ h1, h2, h3, h4 {
 /* ── Scroll animations ──────────────────────────────────────────────────── */
 [data-animate] {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+              transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   transition-delay: var(--delay, 0ms);
 }
 
 [data-animate="fade"]  { transform: none; }
-[data-animate="left"]  { transform: translateX(-28px); }
-[data-animate="right"] { transform: translateX(28px); }
+[data-animate="left"]  { transform: translateX(-20px); }
+[data-animate="right"] { transform: translateX(20px); }
 
 [data-animate].is-visible {
   opacity: 1;
