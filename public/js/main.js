@@ -56,7 +56,7 @@ if (contactForm) {
   });
 }
 
-// ── Discovery Call application form ──────────────────────────────────────
+// ── Vibe Check application form ──────────────────────────────────────
 const applyForm = document.getElementById("applyForm");
 if (applyForm) {
   applyForm.addEventListener("submit", async (e) => {
@@ -67,8 +67,22 @@ if (applyForm) {
 
     const data = Object.fromEntries(new FormData(applyForm));
 
-    // TODO Phase 2: POST to Firebase Function → email coach
-    await new Promise(r => setTimeout(r, 800));
+    try {
+      const res = await fetch(
+        "https://us-central1-you-alignment-mindset-and-soul.cloudfunctions.net/submitVibeCheck",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        }
+      );
+      if (!res.ok) throw new Error("Server error");
+    } catch (err) {
+      btn.textContent = "Submit Application";
+      btn.disabled = false;
+      alert("Something went wrong. Please try again or email hello@yamswellness.com.");
+      return;
+    }
 
     document.getElementById("applySuccess").style.display = "block";
     applyForm.style.display = "none";
