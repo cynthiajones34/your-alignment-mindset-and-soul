@@ -539,10 +539,10 @@ h1, h2, h3, h4 {
   border: none;
 }
 
-.package-arch {
+.package-circle {
   width: 100%;
-  aspect-ratio: 2/3;
-  border-radius: 999px 999px 0 0;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
   overflow: hidden;
   margin-bottom: 24px;
   transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -550,15 +550,15 @@ h1, h2, h3, h4 {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .package-card:hover .package-arch { transform: scale(1.04); }
+  .package-card:hover .package-circle { transform: scale(1.04); }
 }
-.package-arch img { width: 100%; height: 100%; object-fit: cover; }
+.package-circle img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Gradient fills until photos are added */
-.package-arch-revive  { background: linear-gradient(180deg, #EAF2ED 0%, #8FB5A0 100%); }
-.package-arch-restore { background: linear-gradient(180deg, #F7EDE8 0%, #C4967A 80%); }
-.package-arch-realign { background: linear-gradient(180deg, #EDE5D8 0%, #D4C9B8 100%); }
-.package-arch-yams    { background: linear-gradient(180deg, #5A896F 0%, #3D6B54 100%); }
+.package-circle-revive  { background: linear-gradient(145deg, #EAF2ED 0%, #8FB5A0 100%); }
+.package-circle-restore { background: linear-gradient(145deg, #F7EDE8 0%, #C4967A 80%); }
+.package-circle-realign { background: linear-gradient(145deg, #EDE5D8 0%, #D4C9B8 100%); }
+.package-circle-yams    { background: linear-gradient(145deg, #5A896F 0%, #3D6B54 100%); }
 
 .package-card-body {
   padding: 0;
