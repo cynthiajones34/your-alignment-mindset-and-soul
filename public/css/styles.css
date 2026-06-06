@@ -559,8 +559,8 @@ h1, h2, h3, h4 {
 }
 
 .package-circle {
-  width: 100%;
-  aspect-ratio: 1/1;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 24px;
