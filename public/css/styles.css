@@ -1046,10 +1046,10 @@ footer {
 
 footer h4 {
   font-family: 'Inter', sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(250,246,239,0.35);
+  color: rgba(250,246,239,0.5);
   margin-bottom: 20px;
 }
 
