@@ -220,7 +220,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-lg { padding: 16px 44px; font-size: 13px; }
-.btn-sm { padding: 10px 24px; font-size: 11px; }
+.btn-sm { padding: 12px 24px; font-size: 11px; }
 
 /* ── Hero (split, full viewport) ────────────────────────────────────────── */
 .hero-split {
