@@ -570,12 +570,29 @@ h1, h2, h3, h4 {
   margin-bottom: 24px;
   transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .package-card:hover .package-circle { transform: scale(1.04); }
 }
 .package-circle img { width: 100%; height: 100%; object-fit: cover; }
+
+.package-circle-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(30,30,30,0.3);
+  line-height: 1;
+  user-select: none;
+}
+
+.package-circle-num-light {
+  color: rgba(250,246,239,0.5);
+}
 
 /* Gradient fills until photos are added */
 .package-circle-revive  { background: linear-gradient(145deg, #EAF2ED 0%, #8FB5A0 100%); }
@@ -937,13 +954,13 @@ h1, h2, h3, h4 {
 /* ── About page ─────────────────────────────────────────────────────────── */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 80px;
+  grid-template-columns: 1.1fr 1.4fr;
+  gap: 72px;
   align-items: start;
 }
 
 .about-photo {
-  border-radius: var(--radius-lg);
+  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 3/4;
   background: var(--beige);
