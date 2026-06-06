@@ -88,23 +88,26 @@ h1, h2, h3, h4 {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 48px;
-  height: 72px;
+  height: 88px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--text);
-  letter-spacing: 0.07em;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  text-transform: uppercase;
+  flex-shrink: 0;
 }
 
-.nav-logo:hover { text-decoration: none; }
+.nav-logo img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+
+.nav-logo:hover { text-decoration: none; opacity: 0.85; }
 
 .nav-links {
   display: flex;
@@ -346,6 +349,11 @@ h1, h2, h3, h4 {
   to   { transform: rotate(360deg); }
 }
 
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* ── Pull quote (sage green block) ──────────────────────────────────────── */
 .pull-quote-section {
   background: var(--sage);
@@ -377,27 +385,36 @@ h1, h2, h3, h4 {
 }
 
 /* ── Photo strip ────────────────────────────────────────────────────────── */
-.photo-strip {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 28px;
-  padding: 56px 48px 0;
+.photo-strip-wrapper {
+  overflow: hidden;
   background: var(--beige);
-  align-items: end;
+  padding-top: 56px;
+  max-width: 100vw;
 }
 
+.photo-strip {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  align-items: flex-end;
+  width: max-content;
+  animation: marquee-left 30s linear infinite;
+  padding: 0 10px;
+  will-change: transform;
+}
+
+.photo-strip:hover { animation-play-state: paused; }
+
 .photo-strip-item {
+  flex: 0 0 220px;
   overflow: hidden;
   background: var(--beige-dark);
-  /* 50% horizontal radius = semicircle; 33% vertical = matches 2/3 aspect ratio → circular arch */
   border-radius: 50% 50% 0 0 / 33% 33% 0 0;
 }
 
-/* Staggered heights — all ground to the same bottom line */
-.photo-strip-item:nth-child(1) { aspect-ratio: 2/3; }
-.photo-strip-item:nth-child(2) { aspect-ratio: 5/8; }
-.photo-strip-item:nth-child(3) { aspect-ratio: 2/3; }
-.photo-strip-item:nth-child(4) { aspect-ratio: 5/8; }
+/* Staggered heights — alternate tall/short */
+.photo-strip-item:nth-child(odd)  { aspect-ratio: 2/3; }
+.photo-strip-item:nth-child(even) { aspect-ratio: 5/8; }
 
 .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -629,15 +646,24 @@ h1, h2, h3, h4 {
 }
 
 /* ── Testimonials ───────────────────────────────────────────────────────── */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+.testimonials-scroll-wrapper {
+  overflow: hidden;
 }
+
+.testimonials-grid {
+  display: flex;
+  width: max-content;
+  gap: 2px;
+  animation: marquee-left 22s linear infinite;
+}
+
+.testimonials-grid:hover { animation-play-state: paused; }
 
 .testimonial {
   background: var(--white);
   padding: 52px 44px;
+  flex: 0 0 420px;
+  width: 420px;
 }
 
 .testimonial:nth-child(2) { background: var(--beige); }
@@ -1006,13 +1032,12 @@ footer {
   line-height: 1.75;
 }
 
-.footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  color: var(--cream);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+.footer-logo img {
+  height: 56px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 
 footer h4 {
@@ -1102,10 +1127,10 @@ footer h4 {
   .split-text         { padding: 64px 40px; }
 
   .packages-grid      { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
-  .testimonials-grid  { grid-template-columns: 1fr; }
+  .testimonial        { flex: 0 0 340px; width: 340px; padding: 44px 32px; }
   .steps              { grid-template-columns: repeat(2, 1fr); }
-  .photo-strip        { grid-template-columns: 1fr 1fr; height: auto; gap: 16px; padding: 40px 32px; }
-  .photo-strip-item   { aspect-ratio: 2/3; align-self: auto !important; }
+  .photo-strip        { gap: 12px; }
+  .photo-strip-item   { flex: 0 0 160px; }
 
   .about-grid             { grid-template-columns: 1fr; }
   .about-photo            { position: relative; top: 0; aspect-ratio: 16/9; }
@@ -1118,25 +1143,32 @@ footer h4 {
   .section     { padding: 72px 0; }
   .section-lg  { padding: 88px 0; }
 
-  .nav-inner   { padding: 0 24px; }
+  .nav-inner   { padding: 0 24px; height: 64px; }
   .nav-links   { display: none; }
   .nav-hamburger { display: block; }
   .nav-mobile  { padding: 20px 24px 28px; }
+  .nav-logo img { height: 36px; }
 
-  .hero-split-text  { padding: 48px 24px 64px; }
+  .hero-split-text  { padding: 48px 24px 64px; align-items: center; text-align: center; }
+  .hero-actions     { justify-content: center; }
   .hero-display     { font-size: clamp(2.4rem, 10vw, 3.5rem); }
   .hero-badge       { width: 88px; height: 88px; bottom: 24px; right: 24px; }
   .hero-badge-center { width: 38px; height: 38px; font-size: 18px; }
 
-  .pull-quote-section { padding: 80px 24px; }
+  .pull-quote-section { padding: 80px 24px; text-align: center; }
+  .pull-quote-section .btn { display: block; width: fit-content; margin: 0 auto; }
   .pull-quote-text    { font-size: clamp(1.8rem, 6vw, 2.6rem); }
 
-  .split-text  { padding: 52px 24px; }
+  .split-text  { padding: 52px 24px; align-items: center; text-align: center; }
+  .split-text a[style*="align-self"],
+  .hero-split-text a[style*="align-self"] { align-self: center !important; }
+  .split-text .btn,
+  .hero-split-text .btn { align-self: center; }
 
-  .photo-strip     { grid-template-columns: 1fr 1fr; height: 50vw; }
-  .photo-strip-item { aspect-ratio: auto; }
+  .photo-strip     { gap: 10px; }
+  .photo-strip-item { flex: 0 0 130px; }
 
-  .testimonial     { padding: 40px 28px; }
+  .testimonial     { flex: 0 0 300px; width: 300px; padding: 40px 28px; }
   .testimonials-grid { gap: 2px; }
 
   .optin-form         { flex-direction: column; border-radius: var(--radius); }
@@ -1148,4 +1180,9 @@ footer h4 {
   .packages-grid { grid-template-columns: 1fr; gap: 40px 0; }
   .cta-banner  { padding: 88px 24px; }
   .form-grid-2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .photo-strip-item { flex: 0 0 110px; }
+  .testimonial { flex: 0 0 280px; width: 280px; }
 }

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Y.A.M.S. Wellness - Holistic coaching for high-achieving Black women ready to live in alignment. Atlanta, GA.">
   <title>Y.A.M.S. Wellness - Your Alignment, Mindset &amp; Soul</title>
@@ -12,7 +13,7 @@
   <!-- Nav -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">Y.A.M.S. Wellness</a>
+      <a href="/" class="nav-logo"><img src="/images/logo.png" alt="Y.A.M.S. Wellness"></a>
       <ul class="nav-links">
         <li><a href="/work-with-me">Work With Me</a></li>
         <li><a href="/about">About</a></li>
@@ -78,19 +79,20 @@
     </div>
   </section>
 
-  <!-- Photo strip: 4 image slots -->
-  <div class="photo-strip">
-    <div class="photo-strip-item" data-animate style="--delay:0ms">
-      <img src="/images/jump.png" alt="">
-    </div>
-    <div class="photo-strip-item" data-animate style="--delay:100ms">
-      <img src="/images/contact.png" alt="">
-    </div>
-    <div class="photo-strip-item" data-animate style="--delay:200ms">
-      <img src="/images/retreat.png" alt="">
-    </div>
-    <div class="photo-strip-item" data-animate style="--delay:300ms">
-      <img src="/images/retreat-2.png" alt="">
+  <!-- Photo strip: scrolling marquee -->
+  <div class="photo-strip-wrapper">
+    <div class="photo-strip">
+      <div class="photo-strip-item"><img src="/images/strip-1.jpg" alt=""></div>
+      <div class="photo-strip-item"><img src="/images/strip-2.jpg" alt=""></div>
+      <div class="photo-strip-item"><img src="/images/strip-3.jpg" alt=""></div>
+      <div class="photo-strip-item"><img src="/images/strip-4.jpg" alt=""></div>
+      <div class="photo-strip-item"><img src="/images/strip-5.jpg" alt=""></div>
+      <!-- Duplicated for seamless loop -->
+      <div class="photo-strip-item" aria-hidden="true"><img src="/images/strip-1.jpg" alt=""></div>
+      <div class="photo-strip-item" aria-hidden="true"><img src="/images/strip-2.jpg" alt=""></div>
+      <div class="photo-strip-item" aria-hidden="true"><img src="/images/strip-3.jpg" alt=""></div>
+      <div class="photo-strip-item" aria-hidden="true"><img src="/images/strip-4.jpg" alt=""></div>
+      <div class="photo-strip-item" aria-hidden="true"><img src="/images/strip-5.jpg" alt=""></div>
     </div>
   </div>
 
@@ -176,35 +178,65 @@
         <h2 data-animate style="--delay:100ms">Real women. Real shifts.</h2>
       </div>
     </div>
-    <div class="testimonials-grid">
+    <div class="testimonials-scroll-wrapper">
+      <div class="testimonials-grid">
 
-      <div class="testimonial" data-animate style="--delay:0ms">
-        <span class="testimonial-quote-mark">&ldquo;</span>
-        <blockquote>I'm so happy that I joined the sessions and I enjoyed them. I look forward to what this journey will continue to bring me.</blockquote>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar"></div>
-          <cite>D. Wilson</cite>
+        <div class="testimonial">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <blockquote>I'm so happy that I joined the sessions and I enjoyed them. I look forward to what this journey will continue to bring me.</blockquote>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar"></div>
+            <cite>D. Wilson</cite>
+          </div>
         </div>
-      </div>
 
-      <div class="testimonial" data-animate style="--delay:120ms">
-        <span class="testimonial-quote-mark">&ldquo;</span>
-        <blockquote>Thank you for always being there and encouraging me and speaking into me. You're a great coach.</blockquote>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar"></div>
-          <cite>L. Simms</cite>
+        <div class="testimonial">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <blockquote>Thank you for always being there and encouraging me and speaking into me. You're a great coach.</blockquote>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar"></div>
+            <cite>L. Simms</cite>
+          </div>
         </div>
-      </div>
 
-      <div class="testimonial" data-animate style="--delay:240ms">
-        <span class="testimonial-quote-mark">&ldquo;</span>
-        <blockquote>Thanks for your encouragement and uplifting words to take my life back.</blockquote>
-        <div class="testimonial-footer">
-          <div class="testimonial-avatar"></div>
-          <cite>T. Jackson</cite>
+        <div class="testimonial">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <blockquote>Thanks for your encouragement and uplifting words to take my life back.</blockquote>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar"></div>
+            <cite>T. Jackson</cite>
+          </div>
         </div>
-      </div>
 
+        <!-- Duplicated for seamless loop -->
+        <div class="testimonial" aria-hidden="true">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <blockquote>I'm so happy that I joined the sessions and I enjoyed them. I look forward to what this journey will continue to bring me.</blockquote>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar"></div>
+            <cite>D. Wilson</cite>
+          </div>
+        </div>
+
+        <div class="testimonial" aria-hidden="true">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <blockquote>Thank you for always being there and encouraging me and speaking into me. You're a great coach.</blockquote>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar"></div>
+            <cite>L. Simms</cite>
+          </div>
+        </div>
+
+        <div class="testimonial" aria-hidden="true">
+          <span class="testimonial-quote-mark">&ldquo;</span>
+          <blockquote>Thanks for your encouragement and uplifting words to take my life back.</blockquote>
+          <div class="testimonial-footer">
+            <div class="testimonial-avatar"></div>
+            <cite>T. Jackson</cite>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -253,7 +285,7 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="footer-logo">Y.A.M.S. Wellness</div>
+        <div class="footer-logo"><img src="/images/logo.png" alt="Y.A.M.S. Wellness"></div>
         <p>Your Alignment, Mindset &amp; Soul<br>Holistic Wellness Coaching<br>Atlanta, GA</p>
         <p style="margin-top:16px;"><a href="mailto:journey@myyams.com" style="color:rgba(250,246,239,0.65); font-size:13px;">journey@myyams.com</a></p>
         <div style="display:flex; gap:16px; margin-top:12px;">
