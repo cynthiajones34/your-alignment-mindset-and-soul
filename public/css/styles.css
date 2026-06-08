@@ -356,7 +356,7 @@ h1, h2, h3, h4 {
 
 @keyframes marquee-left {
   from { transform: translateX(0); }
-  to   { transform: translateX(calc(-100% - var(--strip-gap, 20px))); }
+  to   { transform: translateX(-100%); }
 }
 
 /* Testimonials use a flat 3+3 duplicate list — correct loop = exactly half the track */
@@ -403,21 +403,24 @@ h1, h2, h3, h4 {
   max-width: 100vw;
 }
 
-/* Outer track: no animation, just holds the two inner groups side-by-side */
+/* Outer track: no gap between inner groups — the trailing padding-right on
+   each inner group provides the seam gap, keeping translateX(-100%) correct. */
 .photo-strip {
   --strip-gap: 20px;
   display: flex;
-  gap: var(--strip-gap);
+  gap: 0;
 }
 
-/* Each inner group animates independently — Emil Kowalski marquee pattern.
-   calc(-100% - var(--strip-gap)) translates exactly one group width + the
-   gap between groups, producing a perfectly seamless loop. */
+/* Each inner group animates independently.
+   padding-right absorbs the inter-group gap into the element's own width so
+   translateX(-100%) — which equals offsetWidth — lands exactly on the next
+   group's start position. No calc() or var() in the keyframe = Safari-safe. */
 .photo-strip-inner {
   flex-shrink: 0;
   display: flex;
   align-items: flex-end;
   gap: var(--strip-gap);
+  padding-right: var(--strip-gap);
   animation: marquee-left 60s linear infinite;
   will-change: transform;
 }
