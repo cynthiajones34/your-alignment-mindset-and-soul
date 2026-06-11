@@ -48,8 +48,24 @@ if (contactForm) {
     btn.textContent = "Sending…";
     btn.disabled = true;
 
-    // TODO Phase 2: wire to Firebase Function or Formspree
-    await new Promise(r => setTimeout(r, 800));
+    const data = Object.fromEntries(new FormData(contactForm));
+
+    try {
+      const res = await fetch(
+        "https://us-central1-you-alignment-mindset-and-soul.cloudfunctions.net/submitContact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        }
+      );
+      if (!res.ok) throw new Error("Server error");
+    } catch (err) {
+      btn.textContent = "Send Message";
+      btn.disabled = false;
+      alert("Something went wrong. Please try again or email journey@myyams.com.");
+      return;
+    }
 
     document.getElementById("contactSuccess").style.display = "block";
     contactForm.style.display = "none";
@@ -100,7 +116,7 @@ if (applyForm) {
     } catch (err) {
       btn.textContent = "Submit Application";
       btn.disabled = false;
-      alert("Something went wrong. Please try again or email hello@yamswellness.com.");
+      alert("Something went wrong. Please try again or email journey@myyams.com.");
       return;
     }
 
