@@ -351,7 +351,7 @@ For coaching inquiries, please use the **Apply** page so I can give your message
 ---
 
 **Below form:**
-You can also reach me at **hello@yamswellness.com**
+You can also reach me at **journey@myyams.com**
 
 Response time: within 2 business days.
 
