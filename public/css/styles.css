@@ -91,7 +91,7 @@ h1, h2, h3, h4 {
   height: 88px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .nav-logo {
@@ -239,8 +239,23 @@ h1, h2, h3, h4 {
 }
 
 .hero-split-text .eyebrow {
-  margin-top: clamp(20px, 6vh, 72px);
+  margin-top: 20px;
 }
+
+.hero-logo {
+  align-self: center;
+  display: block;
+  margin-top: clamp(16px, 5vh, 56px);
+  text-decoration: none;
+}
+
+.hero-logo img {
+  height: clamp(120px, 16vw, 180px);
+  width: auto;
+  display: block;
+}
+
+.hero-logo:hover { opacity: 0.85; }
 
 .hero-display {
   font-family: 'Cormorant Garamond', serif;
@@ -1168,7 +1183,8 @@ footer h4 {
 
   .hero-split         { grid-template-columns: 1fr; min-height: auto; }
   .hero-split-text    { padding: 64px 40px 72px; }
-  .hero-split-text .eyebrow { margin-top: 0; }
+  .hero-split-text .eyebrow { margin-top: 16px; }
+  .hero-logo img      { height: clamp(96px, 30vw, 140px); }
   .hero-split-image   { min-height: 56vw; }
 
   .split-row          { grid-template-columns: 1fr; }
