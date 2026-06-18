@@ -239,13 +239,14 @@ h1, h2, h3, h4 {
 }
 
 .hero-split-text .eyebrow {
-  margin-top: 20px;
+  margin-top: 0;
 }
 
 .hero-logo {
   align-self: center;
   display: block;
   margin-top: 0;
+  margin-bottom: clamp(28px, 5vh, 56px);
   text-decoration: none;
 }
 
