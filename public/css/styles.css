@@ -85,7 +85,7 @@ h1, h2, h3, h4 {
 }
 
 .nav-inner {
-  max-width: var(--max);
+  max-width: none;
   margin: 0 auto;
   padding: 0 48px;
   height: 88px;
