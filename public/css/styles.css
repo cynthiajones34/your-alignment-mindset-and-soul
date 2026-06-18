@@ -102,7 +102,7 @@ h1, h2, h3, h4 {
 }
 
 .nav-logo img {
-  height: 56px;
+  height: 72px;
   width: auto;
   display: block;
 }
@@ -705,8 +705,8 @@ h1, h2, h3, h4 {
   width: 420px;
 }
 
-.testimonial:nth-child(2) { background: var(--beige); }
-.testimonial:nth-child(3) { background: var(--cream); }
+.testimonial:nth-child(3n+2) { background: var(--beige); }
+.testimonial:nth-child(3n+3) { background: var(--cream); }
 
 .testimonial-quote-mark {
   font-family: 'Cormorant Garamond', serif;
@@ -1016,9 +1016,18 @@ h1, h2, h3, h4 {
 
 .method-step {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 20px;
+  grid-template-columns: 64px 1fr;
+  gap: 24px;
   align-items: start;
+}
+
+.method-step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.75rem;
+  font-weight: 600;
+  color: var(--rose-light);
+  line-height: 1;
+  text-align: center;
 }
 
 .method-step-label {
@@ -1026,6 +1035,7 @@ h1, h2, h3, h4 {
   font-size: 1.35rem;
   font-weight: 600;
   color: var(--sage);
+  margin-bottom: 6px;
 }
 
 .method-step p { color: var(--muted); font-size: 14px; margin: 0; }
@@ -1186,7 +1196,7 @@ footer h4 {
   .nav-links   { display: none; }
   .nav-hamburger { display: block; }
   .nav-mobile  { padding: 20px 24px 28px; }
-  .nav-logo img { height: 36px; }
+  .nav-logo img { height: 44px; }
 
   .hero-split-text  { padding: 48px 24px 64px; align-items: center; text-align: center; }
   .hero-actions     { justify-content: center; }
