@@ -91,8 +91,11 @@ h1, h2, h3, h4 {
   height: 88px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
+
+/* Index page: no nav logo, so push the links to the right edge */
+.nav-inner--end { justify-content: flex-end; }
 
 .nav-logo {
   display: flex;
