@@ -373,9 +373,11 @@ h1, h2, h3, h4 {
   to   { transform: rotate(360deg); }
 }
 
-@keyframes marquee-left {
+/* Single doubled track — loop = exactly half. Per-item margin (not flex gap)
+   makes the two halves equal width to the pixel, so -50% has no seam jump. */
+@keyframes photo-scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
+  to   { transform: translateX(-50%); }
 }
 
 /* Testimonials use a flat 3+3 duplicate list — correct loop = exactly half the track */
@@ -422,32 +424,29 @@ h1, h2, h3, h4 {
   max-width: 100vw;
 }
 
-/* Outer track: no gap between inner groups — the trailing padding-right on
-   each inner group provides the seam gap, keeping translateX(-100%) correct. */
+/* One flex track holding both halves; single animation = nothing to de-sync
+   (WebKit does not keep two separate element animations in lockstep). */
 .photo-strip {
   --strip-gap: 20px;
   display: flex;
-  gap: 0;
-}
-
-/* Each inner group animates independently.
-   padding-right absorbs the inter-group gap into the element's own width so
-   translateX(-100%) — which equals offsetWidth — lands exactly on the next
-   group's start position. No calc() or var() in the keyframe = Safari-safe. */
-.photo-strip-inner {
-  flex-shrink: 0;
-  display: flex;
+  width: max-content;
   align-items: flex-end;
-  gap: var(--strip-gap);
-  padding-right: var(--strip-gap);
-  animation: marquee-left 60s linear infinite;
+  animation: photo-scroll 60s linear infinite;
   will-change: transform;
 }
 
-.photo-strip-inner:hover { animation-play-state: paused; }
+.photo-strip:hover { animation-play-state: paused; }
+
+/* WebKit (Safari + DuckDuckGo) won't loop this marquee reliably, so show a
+   static row of the 10 unique photos there. -webkit-named-image matches only
+   WebKit; Chrome/Blink ignores this block and keeps the animation. */
+@supports (background: -webkit-named-image(i)) {
+  .photo-strip { animation: none; }
+}
 
 .photo-strip-item {
   flex: 0 0 220px;
+  margin-right: var(--strip-gap);
   overflow: hidden;
   background: var(--beige-dark);
   border-radius: 50% 50% 0 0 / 33% 33% 0 0;
@@ -1257,7 +1256,7 @@ footer h4 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .photo-strip-inner,
+  .photo-strip,
   .testimonials-grid {
     animation: none;
   }
