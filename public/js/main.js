@@ -16,25 +16,35 @@ document.querySelectorAll(".nav-links a, .nav-mobile a").forEach((link) => {
   }
 });
 
-// ── Email opt-in forms (ConvertKit placeholder) ──────────────────────────
+// ── Email opt-in forms ───────────────────────────────────────────────────
 document.querySelectorAll(".optin-form, .footer-optin-form").forEach((form) => {
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const email = form.querySelector("input[type='email']").value;
+    const emailInput = form.querySelector("input[type='email']");
+    const email = emailInput.value.trim();
     if (!email) return;
 
-    // TODO Phase 2: replace with ConvertKit API call
-    // POST to https://api.convertkit.com/v3/forms/{formId}/subscribe
-    console.log("Opt-in:", email);
+    const btn = form.querySelector("button[type='submit']") || form.querySelector("button");
+    const originalText = btn ? btn.textContent : null;
+    if (btn) { btn.textContent = "Sending…"; btn.disabled = true; }
+
+    try {
+      const res = await fetch(
+        "https://us-central1-you-alignment-mindset-and-soul.cloudfunctions.net/submitOptIn",
+        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) }
+      );
+      if (!res.ok) throw new Error("Server error");
+    } catch (_) {
+      if (btn) { btn.textContent = originalText; btn.disabled = false; }
+      return;
+    }
 
     const success = document.getElementById("optinSuccess");
     if (success) {
       success.style.display = "block";
       form.style.display    = "none";
     } else {
-      form.innerHTML = `<p style="color:var(--sage-dark); font-weight:500;">
-        You're in. Check your inbox for the 5-Day Alignment Reset.
-      </p>`;
+      form.innerHTML = `<p style="color:var(--sage-dark); font-weight:500;">You're in. Check your inbox for the 5-Day Alignment Reset.</p>`;
     }
   });
 });
