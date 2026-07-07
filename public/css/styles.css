@@ -437,6 +437,13 @@ h1, h2, h3, h4 {
 
 .photo-strip:hover { animation-play-state: paused; }
 
+/* WebKit (Safari + DuckDuckGo) won't loop this marquee reliably, so show a
+   static row of the 10 unique photos there. -webkit-named-image matches only
+   WebKit; Chrome/Blink ignores this block and keeps the animation. */
+@supports (background: -webkit-named-image(i)) {
+  .photo-strip { animation: none; }
+}
+
 .photo-strip-item {
   flex: 0 0 220px;
   margin-right: var(--strip-gap);
