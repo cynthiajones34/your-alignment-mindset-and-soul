@@ -157,7 +157,9 @@ if (applyForm) {
   const packages = content.packages || {};
   cards.forEach(card => {
     const link = card.querySelector('a[href*="package="]');
-    const key = link && new URL(link.href, location.origin).searchParams.get("package");
+    // The apply links use "yams-method" (hyphen); the content/session keys use
+    // "yams_method" (underscore). Normalize so THE YAMS METHOD matches too.
+    const key = link && (new URL(link.href, location.origin).searchParams.get("package") || "").replace(/-/g, "_");
     const p = key && packages[key];
     if (!p) return;
     setText(card.querySelector(".package-name"),  p.name);
