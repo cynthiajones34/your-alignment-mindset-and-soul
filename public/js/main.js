@@ -134,3 +134,41 @@ if (applyForm) {
     applyForm.style.display = "none";
   });
 }
+
+// ── Editable marketing content (packages + lead magnet) ──────────────────────
+// Progressive enhancement: the static HTML is the fallback. On load we fetch the
+// coach-edited content and overwrite text only for fields that are present, so a
+// failed or empty fetch leaves the page exactly as shipped. Only runs on pages
+// that actually have packages or the opt-in box.
+(async () => {
+  const cards = document.querySelectorAll(".package-card");
+  const optin = document.querySelector(".optin-box");
+  if (!cards.length && !optin) return;
+
+  let content;
+  try {
+    const res = await fetch("https://us-central1-you-alignment-mindset-and-soul.cloudfunctions.net/getSiteContent");
+    if (!res.ok) return;
+    content = await res.json();
+  } catch { return; }
+
+  const setText = (el, val) => { if (el && val != null && val !== "") el.textContent = val; };
+
+  const packages = content.packages || {};
+  cards.forEach(card => {
+    const link = card.querySelector('a[href*="package="]');
+    const key = link && new URL(link.href, location.origin).searchParams.get("package");
+    const p = key && packages[key];
+    if (!p) return;
+    setText(card.querySelector(".package-name"),  p.name);
+    setText(card.querySelector(".package-price"), p.price);
+    setText(card.querySelector(".package-desc"),  p.desc);
+  });
+
+  const lm = content.leadMagnet;
+  if (optin && lm) {
+    setText(optin.querySelector("h2"), lm.name);
+    setText(optin.querySelector("p:not(.optin-fine)"), lm.desc);
+    setText(optin.querySelector("form button"), lm.button);
+  }
+})();
