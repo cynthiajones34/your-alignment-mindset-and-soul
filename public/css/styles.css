@@ -3,13 +3,14 @@
 
 /* ── Tokens ─────────────────────────────────────────────────────────────── */
 :root {
-  --sage:        #5A896F;
+  --sage:        #3D6B54;
   --sage-dark:   #3D6B54;
   --sage-light:  #8FB5A0;
   --sage-muted:  #EAF2ED;
   --rose:        #C4967A;
   --rose-light:  #E8C9B5;
   --rose-muted:  #F7EDE8;
+  --rose-text:   #96603C;
   --cream:       #FAF6EF;
   --beige:       #EDE5D8;
   --beige-dark:  #D4C9B8;
@@ -67,13 +68,13 @@ h1, h2, h3, h4 {
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sage);
+  color: var(--sage-dark);
   margin-bottom: 16px;
   display: block;
 }
 
 .eyebrow-light { color: var(--sage-light); }
-.eyebrow-rose  { color: var(--rose); }
+.eyebrow-rose  { color: var(--rose-text); }
 
 /* ── Navigation ─────────────────────────────────────────────────────────── */
 .nav {
@@ -131,7 +132,7 @@ h1, h2, h3, h4 {
 .nav-links a:hover { color: var(--text); }
 
 .nav-cta {
-  background: var(--sage) !important;
+  background: var(--sage-dark) !important;
   color: var(--white) !important;
   padding: 10px 24px;
   border-radius: 100px;
@@ -206,9 +207,9 @@ h1, h2, h3, h4 {
 
 .btn:active { transform: scale(0.97); }
 
-.btn-primary { background: var(--sage); color: var(--white); }
+.btn-primary { background: var(--sage-dark); color: var(--white); }
 .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--text); }
-.btn-outline-sage { background: transparent; color: var(--sage); border: 1px solid var(--sage); }
+.btn-outline-sage { background: transparent; color: var(--sage-dark); border: 1px solid var(--sage-dark); }
 .btn-outline-light { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.5); }
 .btn-white { background: var(--white); color: var(--text); }
 .btn-rose { background: var(--rose); color: var(--white); }
@@ -670,7 +671,7 @@ h1, h2, h3, h4 {
   font-family: 'Inter', sans-serif;
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: var(--rose);
+  color: var(--rose-text);
   margin-bottom: 14px;
   text-transform: uppercase;
 }
@@ -899,6 +900,8 @@ h1, h2, h3, h4 {
 .form-group textarea { resize: vertical; min-height: 120px; }
 
 .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.page-split { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+html { overflow-x: clip; } /* clip (not hidden) so entrance-animation translateX and the photo-strip marquee never create horizontal scroll, while keeping position:sticky working */
 
 .form-success {
   display: none;
@@ -958,7 +961,7 @@ h1, h2, h3, h4 {
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--rose);
+  color: var(--rose-text);
   border: none;
   padding: 0;
   margin-bottom: 20px;
@@ -1248,6 +1251,7 @@ footer h4 {
   .packages-grid { grid-template-columns: 1fr; gap: 40px 0; }
   .cta-banner  { padding: 88px 24px; }
   .form-grid-2 { grid-template-columns: 1fr; }
+  .page-split  { grid-template-columns: 1fr; gap: 48px; }
 }
 
 @media (max-width: 480px) {
