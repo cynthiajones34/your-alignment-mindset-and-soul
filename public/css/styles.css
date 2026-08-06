@@ -1252,6 +1252,7 @@ footer h4 {
   .cta-banner  { padding: 88px 24px; }
   .form-grid-2 { grid-template-columns: 1fr; }
   .page-split  { grid-template-columns: 1fr; gap: 48px; }
+  .page-split > div:first-child { position: static; }
 }
 
 @media (max-width: 480px) {
