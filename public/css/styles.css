@@ -901,6 +901,7 @@ h1, h2, h3, h4 {
 
 .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .page-split { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; align-items: start; }
+.page-split-sticky { position: sticky; top: 88px; }
 html { overflow-x: clip; } /* clip (not hidden) so entrance-animation translateX and the photo-strip marquee never create horizontal scroll, while keeping position:sticky working */
 
 .form-success {
@@ -1252,7 +1253,7 @@ footer h4 {
   .cta-banner  { padding: 88px 24px; }
   .form-grid-2 { grid-template-columns: 1fr; }
   .page-split  { grid-template-columns: 1fr; gap: 48px; }
-  .page-split > div:first-child { position: static !important; }
+  .page-split-sticky { position: static; }
 }
 
 @media (max-width: 480px) {
