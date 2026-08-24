@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Y.A.M.S. Wellness Experiences & Shop - Mat Pilates, coffee meet-ups, monthly alignment events, and branded wellness products.">
+  <link rel="canonical" href="https://yamswellness.com/experiences">
+  <meta name="theme-color" content="#5C7A52">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Y.A.M.S. Wellness">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://yamswellness.com/experiences">
+  <meta property="og:title" content="Experiences & Shop - Y.A.M.S. Wellness">
+  <meta property="og:description" content="Where alignment becomes a lifestyle. Mat Pilates, coffee meet-ups, monthly events, and wellness essentials.">
+  <meta property="og:image" content="https://yamswellness.com/images/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Y.A.M.S. Wellness. Holistic Wellness Coaching in Atlanta, Georgia.">
+  <title>Experiences & Shop - Y.A.M.S. Wellness</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* ponytail: page-specific styles, move to styles.css when shipping */
+
+    .exp-hero {
+      text-align: center;
+      padding: 140px 0 80px;
+    }
+    .exp-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .exp-hero .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      text-align: center;
+      max-width: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .exp-hero-img {
+      max-width: 720px;
+      width: 100%;
+      margin: 40px auto 0;
+      border-radius: var(--radius-lg);
+      aspect-ratio: 16/7;
+      object-fit: cover;
+    }
+    .exp-hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Section eyebrow */
+    .section-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 48px;
+    }
+
+    /* Experience cards */
+    .exp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    @media (max-width: 768px) {
+      .exp-grid { grid-template-columns: 1fr; }
+    }
+    .exp-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+    .exp-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .exp-card-body {
+      padding: 28px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .exp-card-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .exp-card-body p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    @media (max-width: 768px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+    }
+    .product-card-body {
+      padding: 20px 20px 28px;
+    }
+    .product-card-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .product-card-body .price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--rose-text);
+      margin-bottom: 16px;
+    }
+
+    /* Lifestyle statement */
+    .lifestyle-block {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .lifestyle-block .accent-line {
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--rose);
+      margin: 0 auto 32px;
+      border-radius: 2px;
+    }
+    .lifestyle-block h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .lifestyle-block p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    /* Signup banner */
+    .signup-banner {
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .signup-banner p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .signup-banner form {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      max-width: 420px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .signup-banner input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      background: var(--white);
+    }
+    .signup-banner input[type="email"]:focus {
+      outline: none;
+      border-color: var(--sage);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><img src="/images/logo.png" alt="Y.A.M.S. Wellness"></a>
+      <ul class="nav-links">
+        <li><a href="/work-with-me">Work With Me</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/experiences">Experiences & Shop</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/apply" class="nav-cta">Apply for a Vibe Check</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="mobileNav">
+      <a href="/work-with-me">Work With Me</a>
+      <a href="/about">About</a>
+      <a href="/experiences">Experiences & Shop</a>
+      <a href="/contact">Contact</a>
+      <a href="/apply">Apply for a Vibe Check</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="section bg-cream">
+    <div class="container exp-hero">
+      <span class="eyebrow" data-animate="fade" style="--delay:100ms">Alignment Oasis</span>
+      <h1 data-animate style="--delay:200ms">Experiences & Shop</h1>
+      <p class="hero-sub" data-animate style="--delay:300ms">Where alignment becomes a lifestyle.</p>
+      <div class="exp-hero-actions" data-animate style="--delay:400ms">
+        <a href="#experiences" class="btn btn-primary btn-lg">Join an Experience</a>
+        <a href="#shop" class="btn btn-outline btn-lg">Shop Essentials</a>
+      </div>
+      <img class="exp-hero-img" data-animate style="--delay:500ms"
+           src="/images/Hero-exxperiences.jpg"
+           alt="A calm, minimalist wellness scene">
+    </div>
+  </section>
+
+  <!-- Experiences -->
+  <section class="section bg-white" id="experiences">
+    <div class="container">
+      <div style="text-align:center;" data-animate>
+        <span class="section-eyebrow">Experiences</span>
+        <h2 class="section-heading">Move. Connect. Reset.</h2>
+      </div>
+
+      <div class="exp-grid">
+        <div class="exp-card" data-exp="pilates" data-animate style="--delay:100ms">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23F7EDE8'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2396603C' font-family='serif' font-size='14' font-style='italic'%3EMat Pilates%3C/text%3E%3C/svg%3E"
+               alt="Woman on a mat in a bright, calm space">
+          <div class="exp-card-body">
+            <h3>Virtual/In-Person Mat Pilates</h3>
+            <p>Strengthen your core and reconnect with your breath through intentional movement.</p>
+            <a href="/apply" class="btn btn-primary">Join Class</a>
+          </div>
+        </div>
+
+        <div class="exp-card" data-exp="coffee" data-animate style="--delay:200ms">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23EDE5D8'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236B6560' font-family='serif' font-size='14' font-style='italic'%3ECoffee Meet-Up%3C/text%3E%3C/svg%3E"
+               alt="Warm coffee shop aesthetic">
+          <div class="exp-card-body">
+            <h3>Free Coffee Meet-Ups</h3>
+            <p>Connect with women in alignment over conversation and community.</p>
+            <a href="/apply" class="btn btn-primary">RSVP</a>
+          </div>
+        </div>
+
+        <div class="exp-card" data-exp="events" data-animate style="--delay:300ms">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' fill='%23EAF2ED'%3E%3Crect width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%233D6B54' font-family='serif' font-size='14' font-style='italic'%3EAlignment Event%3C/text%3E%3C/svg%3E"
+               alt="Journaling, candles, and a small group circle">
+          <div class="exp-card-body">
+            <h3>Monthly Alignment Events</h3>
+            <p>Monthly themed gatherings for reflection, intention-setting, and energy reset.</p>
+            <a href="/apply" class="btn btn-primary">View Calendar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop -->
+  <section class="section bg-sage" id="shop">
+    <div class="container">
+      <div style="text-align:center;" data-animate>
+        <span class="section-eyebrow">Movement Essentials</span>
+        <h2 class="section-heading">Shop the Collection</h2>
+      </div>
+
+      <div class="product-grid">
+        <div class="product-card" data-prod="mat" data-animate style="--delay:100ms">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' fill='%23D4C9B8'%3E%3Crect width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236B6560' font-family='serif' font-size='14' font-style='italic'%3EPilates Mat%3C/text%3E%3C/svg%3E"
+               alt="Y.A.M.S. branded neutral-toned Pilates mat">
+          <div class="product-card-body">
+            <h3>Y.A.M.S. Pilates Mat</h3>
+            <p class="price">$XX</p>
+            <a href="#" class="btn btn-outline-sage">Purchase</a>
+          </div>
+        </div>
+
+        <div class="product-card" data-prod="socks" data-animate style="--delay:200ms">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' fill='%23E8C9B5'%3E%3Crect width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2396603C' font-family='serif' font-size='14' font-style='italic'%3EGrip Socks%3C/text%3E%3C/svg%3E"
+               alt="Cozy branded grip socks">
+          <div class="product-card-body">
+            <h3>Grip Socks</h3>
+            <p class="price">$XX</p>
+            <a href="#" class="btn btn-outline-sage">Purchase</a>
+          </div>
+        </div>
+
+        <div class="product-card" data-prod="collection" data-animate style="--delay:300ms">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' fill='%23F7EDE8'%3E%3Crect width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2396603C' font-family='serif' font-size='14' font-style='italic'%3EWellness Collection%3C/text%3E%3C/svg%3E"
+               alt="Journals, candles, and hydration bottles">
+          <div class="product-card-body">
+            <h3>Branded Wellness Products</h3>
+            <p class="price">Varies</p>
+            <a href="#" class="btn btn-outline-sage">Shop Collection</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lifestyle Statement -->
+  <section class="section bg-cream">
+    <div class="container">
+      <div class="lifestyle-block" data-animate>
+        <span class="accent-line"></span>
+        <h2>Alignment isn't a moment. It's a lifestyle.</h2>
+        <p>This space is designed to help you practice alignment through movement, community, and daily rituals that support your growth.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signup Banner -->
+  <section class="bg-beige">
+    <div class="container signup-banner" data-animate>
+      <p>Stay aligned. Join our monthly updates.</p>
+      <form class="footer-optin-form">
+        <input type="email" aria-label="Email address" placeholder="Your email" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="/images/logo.png" alt="Y.A.M.S. Wellness"></div>
+        <p>Your Alignment, Mindset &amp; Soul<br>Holistic Wellness Coaching<br>Atlanta, GA</p>
+        <p style="margin-top:16px;"><a href="mailto:journey@myyams.com" style="color:rgba(250,246,239,0.65); font-size:13px;">journey@myyams.com</a></p>
+        <div style="display:flex; gap:16px; margin-top:12px;">
+          <a href="https://instagram.com/myyams" target="_blank" rel="noopener" style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(250,246,239,0.5);">Instagram</a>
+          <a href="https://tiktok.com/@myyams" target="_blank" rel="noopener" style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(250,246,239,0.5);">TikTok</a>
+        </div>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a href="/work-with-me">Work With Me</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/experiences">Experiences & Shop</a></li>
+          <li><a href="/apply">Apply</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="https://you-alignment-mindset-and-soul.web.app">Client Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Join the List</h4>
+        <p style="font-size:13px; color:rgba(250,246,239,0.45); margin-bottom:0; line-height:1.75;">Get the free 5-Day Alignment Reset and weekly notes on rest, purpose, and alignment.</p>
+        <form class="footer-optin-form">
+          <input type="email" aria-label="Email address" placeholder="Your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Y.A.M.S. Wellness. All rights reserved.</span>
+      <span><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms &amp; Conditions</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // ponytail: progressive enhancement, same pattern as main.js package overrides
+    (async () => {
+      let content;
+      try {
+        const res = await fetch("https://us-central1-you-alignment-mindset-and-soul.cloudfunctions.net/getSiteContent");
+        if (!res.ok) return;
+        content = await res.json();
+      } catch { return; }
+
+      const setText = (el, val) => { if (el && val != null && val !== "") el.textContent = val; };
+
+      // Experiences
+      const exp = content.experiences || {};
+      document.querySelectorAll("[data-exp]").forEach(card => {
+        const e = exp[card.dataset.exp];
+        if (!e) return;
+        setText(card.querySelector("h3"), e.title);
+        setText(card.querySelector("p"), e.desc);
+        const btn = card.querySelector("a.btn");
+        if (btn) { setText(btn, e.buttonText); if (e.buttonLink) btn.href = e.buttonLink; }
+        if (e.image) card.querySelector("img").src = e.image;
+      });
+
+      // Products
+      const prod = content.products || {};
+      document.querySelectorAll("[data-prod]").forEach(card => {
+        const p = prod[card.dataset.prod];
+        if (!p) return;
+        setText(card.querySelector("h3"), p.title);
+        setText(card.querySelector(".price"), p.price);
+        const btn = card.querySelector("a.btn");
+        if (btn && p.buttonLink) btn.href = p.buttonLink;
+        if (p.image) card.querySelector("img").src = p.image;
+      });
+    })();
+  </script>
+</body>
+</html>
