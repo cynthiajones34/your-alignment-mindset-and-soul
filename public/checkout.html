@@ -20,6 +20,19 @@
   <meta property="og:image:alt" content="Y.A.M.S. Wellness. Holistic Wellness Coaching in Atlanta, Georgia.">
   <title>Checkout Y.A.M.S. Wellness</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    /* First-session calendar (checkout only) */
+    .cal { border: 1px solid var(--beige-dark); border-radius: var(--radius); background: var(--white); padding: 14px; }
+    .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; }
+    .cal-nav { background: none; border: 1px solid var(--beige-dark); border-radius: 50%; width: 34px; height: 34px; font-size: 1.2rem; line-height: 1; cursor: pointer; color: var(--text); }
+    .cal-nav:disabled { opacity: .3; cursor: default; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+    .cal-dow { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 4px 0; }
+    .cal-day { aspect-ratio: 1; width: 100%; max-width: 44px; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 14px; color: var(--muted); opacity: .45; border: none; background: none; padding: 0; }
+    button.cal-day { opacity: 1; color: var(--text); background: var(--sage-muted, #EAF2ED); cursor: pointer; font-weight: 500; }
+    button.cal-day:hover, button.cal-day:focus-visible { outline: 2px solid var(--sage); outline-offset: 1px; }
+    button.cal-day[aria-pressed="true"] { background: var(--sage-dark); color: #fff; }
+  </style>
 </head>
 <body>
 
@@ -87,21 +100,27 @@
               <label for="buyPhone">Phone</label>
               <input type="tel" id="buyPhone" autocomplete="tel">
             </div>
-            <fieldset class="form-group" style="border:none; padding:0; margin:0 0 16px;">
+            <fieldset style="border:none; padding:0; margin:0 0 24px; min-width:0;">
               <legend style="font-size:14px; font-weight:500; margin-bottom:6px;">Pick your first session</legend>
               <p style="font-size:12px; color:var(--muted); margin:0 0 8px;">All times Eastern. Christina confirms your time by email; book the rest of your sessions in your portal.</p>
               <div id="slotPicker">
-                <label for="slotDay" class="sr-only" style="position:absolute; left:-9999px;">Day</label>
-                <select id="slotDay" style="width:100%; margin-bottom:10px;"><option value="">Loading open times…</option></select>
-                <div id="slotTimes" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+                <div class="cal" id="cal" aria-live="polite">
+                  <div class="cal-head">
+                    <button type="button" class="cal-nav" id="calPrev" aria-label="Previous month">&lsaquo;</button>
+                    <span id="calTitle">Loading open times…</span>
+                    <button type="button" class="cal-nav" id="calNext" aria-label="Next month">&rsaquo;</button>
+                  </div>
+                  <div class="cal-grid" id="calGrid"></div>
+                </div>
+                <div id="slotTimes" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;"></div>
               </div>
               <p id="slotChosen" role="status" style="font-size:13px; color:var(--sage-dark); margin:8px 0 0;"></p>
-              <label style="display:flex; gap:10px; align-items:center; font-size:13px; color:var(--muted); margin-top:8px;">
-                <input type="checkbox" id="slotLater"> I'll pick a time later in my portal
+              <label style="display:flex; gap:10px; align-items:center; justify-content:flex-start; text-align:left; font-size:13px; color:var(--muted); margin-top:10px;">
+                <input type="checkbox" id="slotLater" style="width:auto; margin:0;"> I'll pick a time later in my portal
               </label>
             </fieldset>
             <label style="display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--muted); margin:8px 0 20px;">
-              <input type="checkbox" id="buyTerms" style="margin-top:3px;">
+              <input type="checkbox" id="buyTerms" style="width:auto; margin-top:3px;">
               <span>I agree to the <a href="/terms" target="_blank" rel="noopener">Terms &amp; Conditions</a>, including the cancellation policy and the 60-day session expiry.</span>
             </label>
             <p id="buyMsg" role="alert" style="font-size:14px; color:#c62828; min-height:1em; margin-bottom:12px;"></p>
@@ -171,30 +190,52 @@
 
       const msg = t => { $("buyMsg").textContent = t || ""; };
 
-      // First-session picker. Open times come from the server (same rules as the portal).
-      let slots = [], pick = null;
+      // First-session picker: month calendar of days with openings, then times.
+      // Open times come from the server (same rules as the portal).
+      let slots = [], pick = null, selDay = null, month = null, months = [];
       const fmtDay = d => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { timeZone: "UTC", weekday: "long", month: "2-digit", day: "2-digit", year: "numeric" }).replace(/\//g, "-");
       const fmtTime = t => { const [h, m] = t.split(":").map(Number); return ((h + 11) % 12 + 1) + ":" + String(m).padStart(2, "0") + " " + (h < 12 ? "AM" : "PM"); };
+      const pad = n => String(n).padStart(2, "0");
+      function renderCal() {
+        const days = new Set(slots.map(s => s.date));
+        if (!month) { $("calTitle").textContent = "No open times right now"; $("calGrid").innerHTML = ""; $("calPrev").disabled = $("calNext").disabled = true; return; }
+        const [y, m] = month.split("-").map(Number);
+        $("calTitle").textContent = new Date(Date.UTC(y, m - 1, 1)).toLocaleDateString("en-US", { timeZone: "UTC", month: "long", year: "numeric" });
+        const first = new Date(Date.UTC(y, m - 1, 1)).getUTCDay(), count = new Date(Date.UTC(y, m, 0)).getUTCDate();
+        let html = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map(d => '<span class="cal-dow" aria-hidden="true">' + d + "</span>").join("");
+        html += '<span></span>'.repeat(first);
+        for (let d = 1; d <= count; d++) {
+          const date = y + "-" + pad(m) + "-" + pad(d);
+          html += days.has(date)
+            ? '<button type="button" class="cal-day" data-date="' + date + '" aria-pressed="' + (date === selDay) + '" aria-label="' + fmtDay(date) + ', open times available">' + d + "</button>"
+            : '<span class="cal-day" aria-hidden="true">' + d + "</span>";
+        }
+        $("calGrid").innerHTML = html;
+        $("calGrid").querySelectorAll("button.cal-day").forEach(b => b.onclick = () => { selDay = b.dataset.date; renderCal(); renderTimes(); });
+        const k = months.indexOf(month);
+        $("calPrev").disabled = k <= 0; $("calNext").disabled = k >= months.length - 1;
+      }
+      $("calPrev").onclick = () => { month = months[months.indexOf(month) - 1] || month; renderCal(); };
+      $("calNext").onclick = () => { month = months[months.indexOf(month) + 1] || month; renderCal(); };
       function renderTimes() {
-        const day = $("slotDay").value;
-        $("slotTimes").innerHTML = slots.filter(s => s.date === day).map(s =>
-          '<button type="button" class="btn ' + (pick && pick.date === s.date && pick.time === s.time ? "btn-primary" : "btn-outline") + ' btn-sm" data-time="' + s.time + '" aria-pressed="' + !!(pick && pick.date === s.date && pick.time === s.time) + '">' + fmtTime(s.time) + "</button>").join("");
+        $("slotTimes").innerHTML = selDay ? '<p style="width:100%; font-size:13px; color:var(--muted); margin:0;">' + fmtDay(selDay) + ":</p>" + slots.filter(s => s.date === selDay).map(s => {
+          const on = pick && pick.date === s.date && pick.time === s.time;
+          return '<button type="button" class="btn ' + (on ? "btn-primary" : "btn-outline") + ' btn-sm" data-time="' + s.time + '" aria-pressed="' + !!on + '">' + fmtTime(s.time) + "</button>";
+        }).join("") : "";
         $("slotTimes").querySelectorAll("button").forEach(b => b.onclick = () => {
-          pick = { date: day, time: b.dataset.time }; $("slotLater").checked = false;
+          pick = { date: selDay, time: b.dataset.time }; $("slotLater").checked = false;
           $("slotChosen").textContent = "Selected: " + fmtDay(pick.date) + " at " + fmtTime(pick.time) + " ET"; renderTimes();
         });
       }
       async function loadSlots() {
         try { slots = (await (await fetch(FN + "getOpenSlots")).json()).slots || []; } catch (e) { slots = []; }
-        const days = [...new Set(slots.map(s => s.date))];
-        $("slotDay").innerHTML = days.length
-          ? '<option value="">Choose a day</option>' + days.map(d => '<option value="' + d + '">' + fmtDay(d) + "</option>").join("")
-          : '<option value="">No open times right now</option>';
-        if (!days.length) $("slotLater").checked = true;
+        months = [...new Set(slots.map(s => s.date.slice(0, 7)))];
+        if (!months.includes(month)) month = months[0] || null;
+        if (selDay && !slots.some(s => s.date === selDay)) selDay = null;
+        if (!slots.length) $("slotLater").checked = true;
         if (pick && !slots.some(s => s.date === pick.date && s.time === pick.time)) { pick = null; $("slotChosen").textContent = ""; }
-        renderTimes();
+        renderCal(); renderTimes();
       }
-      $("slotDay").onchange = renderTimes;
       $("slotLater").onchange = () => { if ($("slotLater").checked) { pick = null; $("slotChosen").textContent = ""; renderTimes(); } };
       loadSlots();
 
