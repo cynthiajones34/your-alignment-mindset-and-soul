@@ -188,7 +188,7 @@
         restore:     { name: "RESTORE",         price: "2 Intensive Sessions · $350" },
         realign:     { name: "REALIGN",         price: "6-Week Program · $2,000" },
         yams_method: { name: "THE YAMS METHOD", price: "12-Week Transformation · $3,500" },
-        individual:  { name: "Individual Session", price: "1 Session · $50", desc: "A single 60-minute coaching session." }
+        individual:  { name: "Individual Session", price: "1 Session · $50", desc: "A single 45-minute coaching session." }
       };
       const key = (new URLSearchParams(location.search).get("package") || "").replace(/-/g, "_");
       if (!DEFAULTS[key]) { location.replace("/work-with-me"); return; }
