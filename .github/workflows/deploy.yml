@@ -5,6 +5,12 @@ on:
     branches:
       - main
 
+# One deploy at a time: overlapping runs collide on the same Cloud Functions
+# ("Failed to update function"). New pushes wait for the running deploy.
+concurrency:
+  group: firebase-deploy
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
