@@ -115,6 +115,16 @@
                 <div id="slotTimes" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;"></div>
               </div>
               <p id="slotChosen" role="status" style="font-size:13px; color:var(--sage-dark); margin:8px 0 0;"></p>
+              <div id="locWrap" style="margin-top:14px;">
+                <p style="font-size:14px; font-weight:500; margin:0 0 6px;">Where should we meet?</p>
+                <div style="display:flex; flex-wrap:wrap; gap:8px 18px; font-size:14px;">
+                  <label style="display:flex; gap:6px; align-items:center;"><input type="radio" name="loc" value="zoom" checked style="width:auto; margin:0;"> Zoom</label>
+                  <label style="display:flex; gap:6px; align-items:center;"><input type="radio" name="loc" value="meet" style="width:auto; margin:0;"> Google Meet</label>
+                  <label style="display:flex; gap:6px; align-items:center;"><input type="radio" name="loc" value="facetime" style="width:auto; margin:0;"> FaceTime</label>
+                  <label style="display:flex; gap:6px; align-items:center;"><input type="radio" name="loc" value="phone" style="width:auto; margin:0;"> Phone call</label>
+                </div>
+                <p id="locHint" style="font-size:12px; color:var(--muted); margin:6px 0 0;">Your meeting link arrives in your confirmation email.</p>
+              </div>
               <label style="display:flex; gap:10px; align-items:center; justify-content:flex-start; text-align:left; font-size:13px; color:var(--muted); margin-top:10px;">
                 <input type="checkbox" id="slotLater" style="width:auto; margin:0;"> I'll pick a time later in my portal
               </label>
@@ -236,16 +246,23 @@
         if (pick && !slots.some(s => s.date === pick.date && s.time === pick.time)) { pick = null; $("slotChosen").textContent = ""; }
         renderCal(); renderTimes();
       }
-      $("slotLater").onchange = () => { if ($("slotLater").checked) { pick = null; $("slotChosen").textContent = ""; renderTimes(); } };
+      $("slotLater").onchange = () => { if ($("slotLater").checked) { pick = null; $("slotChosen").textContent = ""; renderTimes(); } $("locWrap").style.display = $("slotLater").checked ? "none" : "block"; };
       loadSlots();
 
+      // Where they meet (first session). FaceTime/Phone use the Phone field above.
+      const loc = () => (document.querySelector('input[name="loc"]:checked') || {}).value || "zoom";
+      const needsPhone = () => loc() === "facetime" || loc() === "phone";
+      document.querySelectorAll('input[name="loc"]').forEach(r => r.onchange = () => {
+        $("locHint").textContent = needsPhone() ? "Christina will " + (loc() === "facetime" ? "FaceTime" : "call") + " you at the phone number above (required)." : "Your meeting link arrives in your confirmation email.";
+      });
       const details = () => ({ package: key, name: $("buyName").value.trim(), email: $("buyEmail").value.trim(), phone: $("buyPhone").value.trim(),
-        ...(pick && !$("slotLater").checked ? pick : {}) });
+        ...(pick && !$("slotLater").checked ? { ...pick, location: loc(), contactPhone: needsPhone() ? $("buyPhone").value.trim() : "" } : {}) });
       const valid = () => {
         const d = details();
         if (!pick && !$("slotLater").checked) return "Please pick a time for your first session, or choose to pick one later.";
         if (!d.name) return "Please enter your name.";
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return "Please enter a valid email.";
+        if (d.date && needsPhone() && d.phone.replace(/\D/g, "").length < 10) return "Please enter your phone number so Christina can " + (loc() === "facetime" ? "FaceTime" : "call") + " you.";
         if (!$("buyTerms").checked) return "Please agree to the Terms & Conditions.";
         return null;
       };
@@ -275,7 +292,7 @@
           btn.onclick = async () => {
             if (!pick) { msg("Pick another time above first (or check \"pick a time later\")."); if (!$("slotLater").checked) return; }
             btn.disabled = true;
-            try { await capture(orderID, pick ? pick : { skipSession: true }); }
+            try { await capture(orderID, pick ? { ...pick, location: loc(), contactPhone: needsPhone() ? $("buyPhone").value.trim() : "" } : { skipSession: true }); }
             catch (err) { $("buyMsg").style.color = "#c62828"; msg(err.message); }
             btn.disabled = false;
           };
