@@ -87,12 +87,26 @@
               <label for="buyPhone">Phone</label>
               <input type="tel" id="buyPhone" autocomplete="tel">
             </div>
+            <fieldset class="form-group" style="border:none; padding:0; margin:0 0 16px;">
+              <legend style="font-size:14px; font-weight:500; margin-bottom:6px;">Pick your first session</legend>
+              <p style="font-size:12px; color:var(--muted); margin:0 0 8px;">All times Eastern. Christina confirms your time by email; book the rest of your sessions in your portal.</p>
+              <div id="slotPicker">
+                <label for="slotDay" class="sr-only" style="position:absolute; left:-9999px;">Day</label>
+                <select id="slotDay" style="width:100%; margin-bottom:10px;"><option value="">Loading open times…</option></select>
+                <div id="slotTimes" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+              </div>
+              <p id="slotChosen" role="status" style="font-size:13px; color:var(--sage-dark); margin:8px 0 0;"></p>
+              <label style="display:flex; gap:10px; align-items:center; font-size:13px; color:var(--muted); margin-top:8px;">
+                <input type="checkbox" id="slotLater"> I'll pick a time later in my portal
+              </label>
+            </fieldset>
             <label style="display:flex; gap:10px; align-items:flex-start; font-size:13px; color:var(--muted); margin:8px 0 20px;">
               <input type="checkbox" id="buyTerms" style="margin-top:3px;">
               <span>I agree to the <a href="/terms" target="_blank" rel="noopener">Terms &amp; Conditions</a>, including the cancellation policy and the 60-day session expiry.</span>
             </label>
             <p id="buyMsg" role="alert" style="font-size:14px; color:#c62828; min-height:1em; margin-bottom:12px;"></p>
             <div id="paypalButtons"></div>
+            <button type="button" class="btn btn-primary" id="retryCapture" style="display:none; width:100%;">Complete payment with this time</button>
           </form>
         </div>
 
@@ -156,9 +170,39 @@
       }).catch(() => {});
 
       const msg = t => { $("buyMsg").textContent = t || ""; };
-      const details = () => ({ package: key, name: $("buyName").value.trim(), email: $("buyEmail").value.trim(), phone: $("buyPhone").value.trim() });
+
+      // First-session picker. Open times come from the server (same rules as the portal).
+      let slots = [], pick = null;
+      const fmtDay = d => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { timeZone: "UTC", weekday: "long", month: "2-digit", day: "2-digit", year: "numeric" }).replace(/\//g, "-");
+      const fmtTime = t => { const [h, m] = t.split(":").map(Number); return ((h + 11) % 12 + 1) + ":" + String(m).padStart(2, "0") + " " + (h < 12 ? "AM" : "PM"); };
+      function renderTimes() {
+        const day = $("slotDay").value;
+        $("slotTimes").innerHTML = slots.filter(s => s.date === day).map(s =>
+          '<button type="button" class="btn ' + (pick && pick.date === s.date && pick.time === s.time ? "btn-primary" : "btn-outline") + ' btn-sm" data-time="' + s.time + '" aria-pressed="' + !!(pick && pick.date === s.date && pick.time === s.time) + '">' + fmtTime(s.time) + "</button>").join("");
+        $("slotTimes").querySelectorAll("button").forEach(b => b.onclick = () => {
+          pick = { date: day, time: b.dataset.time }; $("slotLater").checked = false;
+          $("slotChosen").textContent = "Selected: " + fmtDay(pick.date) + " at " + fmtTime(pick.time) + " ET"; renderTimes();
+        });
+      }
+      async function loadSlots() {
+        try { slots = (await (await fetch(FN + "getOpenSlots")).json()).slots || []; } catch (e) { slots = []; }
+        const days = [...new Set(slots.map(s => s.date))];
+        $("slotDay").innerHTML = days.length
+          ? '<option value="">Choose a day</option>' + days.map(d => '<option value="' + d + '">' + fmtDay(d) + "</option>").join("")
+          : '<option value="">No open times right now</option>';
+        if (!days.length) $("slotLater").checked = true;
+        if (pick && !slots.some(s => s.date === pick.date && s.time === pick.time)) { pick = null; $("slotChosen").textContent = ""; }
+        renderTimes();
+      }
+      $("slotDay").onchange = renderTimes;
+      $("slotLater").onchange = () => { if ($("slotLater").checked) { pick = null; $("slotChosen").textContent = ""; renderTimes(); } };
+      loadSlots();
+
+      const details = () => ({ package: key, name: $("buyName").value.trim(), email: $("buyEmail").value.trim(), phone: $("buyPhone").value.trim(),
+        ...(pick && !$("slotLater").checked ? pick : {}) });
       const valid = () => {
         const d = details();
+        if (!pick && !$("slotLater").checked) return "Please pick a time for your first session, or choose to pick one later.";
         if (!d.name) return "Please enter your name.";
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) return "Please enter a valid email.";
         if (!$("buyTerms").checked) return "Please agree to the Terms & Conditions.";
@@ -167,9 +211,36 @@
       const post = async (name, body) => {
         const res = await fetch(FN + name, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
         const out = await res.json().catch(() => ({}));
-        if (!res.ok) throw new Error(out.error || "Something went wrong. Please try again.");
+        if (!res.ok) throw Object.assign(new Error(out.error || "Something went wrong. Please try again."), { slotTaken: !!out.slotTaken });
         return out;
       };
+      // Capture. If their time was taken while paying, nothing is charged yet:
+      // ask for another time, then finish the same PayPal order with it.
+      async function capture(orderID, override) {
+        try {
+          const r = await post("capturePackageOrder", { orderID, ...override });
+          $("buyForm").style.display = "none";
+          $("buySuccessMsg").textContent = (r.bookingId ? "Your first session request is with Christina, and you'll get an email when she confirms it. " : "") +
+            (r.newAccount ? "Check your email for a link to set your password, then book your sessions in your client portal."
+                          : "Your sessions were added to your client portal. Sign in to book them.");
+          $("buySuccess").style.display = "block";
+          $("buySuccess").scrollIntoView({ behavior: "smooth", block: "center" });
+          return r;
+        } catch (e) {
+          if (!e.slotTaken) throw e;
+          await loadSlots();
+          $("paypalButtons").style.display = "none";
+          const btn = $("retryCapture"); btn.style.display = "block";
+          btn.onclick = async () => {
+            if (!pick) { msg("Pick another time above first (or check \"pick a time later\")."); if (!$("slotLater").checked) return; }
+            btn.disabled = true;
+            try { await capture(orderID, pick ? pick : { skipSession: true }); }
+            catch (err) { $("buyMsg").style.color = "#c62828"; msg(err.message); }
+            btn.disabled = false;
+          };
+          throw new Error("That time was just taken. You haven't been charged. Pick another time above, then press \"Complete payment with this time\".");
+        }
+      }
 
       const sc = document.createElement("script");
       sc.src = "https://www.paypal.com/sdk/js?client-id=" + PAYPAL_CLIENT_ID + "&currency=USD&intent=capture&components=buttons&enable-funding=card,paylater";
@@ -179,12 +250,12 @@
         onClick: (data, actions) => { const e = valid(); msg(e); return e ? actions.reject() : actions.resolve(); },
         createOrder: async () => {
           try { return (await post("createPackageOrder", details())).orderID; }
-          catch (e) { msg(e.message); throw e; }
+          catch (e) { msg(e.message); if (e.slotTaken) loadSlots(); throw e; }
         },
         onApprove: async (data) => {
           msg(""); $("buyMsg").style.color = "var(--muted)"; $("buyMsg").textContent = "Finishing your payment…";
           try {
-            const r = await post("capturePackageOrder", { orderID: data.orderID });
+            const r = await capture(data.orderID, {});
             $("buyForm").style.display = "none";
             $("buySuccessMsg").textContent = r.newAccount
               ? "Check your email for a link to set your password, then book your sessions in your client portal."
