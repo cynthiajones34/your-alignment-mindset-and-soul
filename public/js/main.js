@@ -141,9 +141,11 @@ if (applyForm) {
 // failed or empty fetch leaves the page exactly as shipped. Only runs on pages
 // that actually have packages or the opt-in box.
 (async () => {
-  const cards = document.querySelectorAll(".package-card");
+  // .package-card = home page cards; .package-detail = Work With Me sections.
+  const cards = document.querySelectorAll(".package-card, .package-detail");
   const optin = document.querySelector(".optin-box");
-  if (!cards.length && !optin) return;
+  const pkgSelect = document.querySelector("select#package"); // apply form
+  if (!cards.length && !optin && !pkgSelect) return;
 
   let content;
   try {
@@ -165,6 +167,11 @@ if (applyForm) {
     setText(card.querySelector(".package-name"),  p.name);
     setText(card.querySelector(".package-price"), p.price);
     setText(card.querySelector(".package-desc"),  p.desc);
+    setText(card.querySelector(".package-details"), p.details);
+  });
+  pkgSelect?.querySelectorAll("option").forEach(opt => {
+    const p = packages[opt.value.replace(/-/g, "_")];
+    if (p?.name && p.price) opt.textContent = `${p.name} ${p.price}`;
   });
 
   const lm = content.leadMagnet;
